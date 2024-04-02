@@ -182,3 +182,54 @@ form .btn input[type="submit"]{
   font-weight: 500;
   cursor: pointer;
 }
+
+/*select {*/
+/*  !* Reset *!*/
+/*  appearance: none;*/
+/*  border: 0;*/
+/*  outline: 0;*/
+/*  font: inherit;*/
+/*  !* Personalize *!*/
+/*  width: 20rem;*/
+/*  padding: 1rem 4rem 1rem 1rem;*/
+/*  !*background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,*!*/
+/*  background: #fa4299;*/
+/*  linear-gradient(to left, #0000 3em, var(--select-bg) 3em);*/
+/*  color: white;*/
+/*  border-radius: 0.25em;*/
+/*  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);*/
+/*  cursor: pointer;*/
+/*  !* Remove IE arrow *!*/
+/*  &::-ms-expand {*/
+/*    display: none;*/
+/*  }*/
+/*  !* Remove focus outline *!*/
+/*  &:focus {*/
+/*    outline: none;*/
+/*  }*/
+/*  !* <option> colors *!*/
+/*  option {*/
+/*    color: inherit;*/
+/*    background-color: #42adfa;*/
+/*  }*/
+/*}*/
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000000"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+/* Style the options */
+select option {
+  padding: 10px;
+  font-size: 16px;
+}
