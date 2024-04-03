@@ -10,6 +10,16 @@ public class FacilityOwner {
     private int id;
 
     private String username;
+    private String phoneno;
+
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
+
     private String password;
     private String fullname;
 
