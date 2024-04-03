@@ -10,7 +10,27 @@ public class Admin {
     private int id;
     private String username;
     private String password;
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
+
     private String email;
+    private String fullname;
+
+    private String phoneno;
 
     public int getId() {
         return id;
