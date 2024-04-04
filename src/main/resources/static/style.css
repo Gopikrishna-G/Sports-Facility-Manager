@@ -20,14 +20,15 @@ html,body{
   background: #fa4299;
   color: #fff;
 }
-.wrapper{
+.wrapper {
   overflow: hidden;
-  max-width: 390px;
+  max-width: 720px; /* Increased width by 20% */
   background: #fff;
   padding: 30px;
   border-radius: 5px;
-  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
 }
+
 .wrapper .title-text{
   display: flex;
   width: 200%;

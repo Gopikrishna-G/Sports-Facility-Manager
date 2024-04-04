@@ -42,7 +42,7 @@
               <input type="submit" name="loginbtn" value="Login">
             </div>
           </form>
-          <form action="" method="post">
+          <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
             <div class="field">
               <select name="type">
                 <option value="User">User</option>
@@ -51,16 +51,20 @@
               </select>
             </div>
             <div class="field">
-              <input type="text" name="username" placeholder="User ID">
+              <input th:field="*{username}" type="text" name="username" placeholder="User ID">
+            </div>
+
+            <div class="field">
+              <input th:field="*{name}" type="text" name="name" placeholder="Full name">
             </div>
             <div class="field">
-              <input type="text" name="name" placeholder="Full name">
-            </div>
+              <input th:field="*{password}" type="password" name="password" placeholder="New password"></div>
             <div class="field">
-              <input type="password" name="password" placeholder="New password"></div>
+              <input th:field="*{email}" type="email" name="email" placeholder="Enter email ID"></div>
             <div class="field">
-              <input type="password" name="conpassword" placeholder="Confirm New Password">
-            </div>
+              <input th:field="*{city}" type="text" name="city" placeholder="City"></div>
+              <div class="field">
+                <input th:field="*{phoneNo}" type="text" name="phoneno" placeholder="Phone number"></div>
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" name="registerbtn" value="Register">

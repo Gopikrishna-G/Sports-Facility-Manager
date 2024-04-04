@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Sports Facility</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">Sports Facility</div>
+        <div class="title signup">Sports Facility</div>
+    </div>
+    <div class="form-container">
+        <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Register</label>
+            <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+            <form action="" class="login" method="post">
+                <div class="field">
+                    <select name="type">
+                        <option value="User">User</option>
+                        <option value="Facility Owner">Facility Owner</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <input type="text" name="username" placeholder="User ID" required>
+                </div>
+                <div class="field">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <!-- <div class="pass-link"><a href="#">Forgot password?</a></div> -->
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" name="loginbtn" value="Login">
+                </div>
+            </form>
+            <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+                <div class="field">
+                    <select name="type">
+                        <option value="User">User</option>
+                        <option value="Facility Owner">Facility Owner</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <input th:field="*{username}" type="text" name="username" placeholder="User ID">
+                </div>
+
+                <div class="field">
+                    <input th:field="*{name}" type="text" name="name" placeholder="Full name">
+                </div>
+                <div class="field">
+                    <input th:field="*{password}" type="password" name="password" placeholder="New password"></div>
+                <div class="field">
+                    <input th:field="*{email}" type="email" name="email" placeholder="Enter email ID"></div>
+                <div class="field">
+                    <input th:field="*{city}" type="text" name="city" placeholder="City"></div>
+                <div class="field">
+                    <input th:field="*{phoneNo}" type="text" name="phoneno" placeholder="Phone number"></div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" name="registerbtn" value="Register">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const loginBtn = document.querySelector("label.login");
+    const signupBtn = document.querySelector("label.signup");
+    const signupLink = document.querySelector("form .signup-link a");
+    signupBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+    });
+    loginBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+    });
+    signupLink.onclick = (()=>{
+        signupBtn.click();
+        return false;
+    });
+</script>
+
+</body>
+</html>
