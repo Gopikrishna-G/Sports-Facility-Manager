@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Sports Facility</title>
+    <link rel="stylesheet" href="Home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title">Sports Facility</div>
+    </div>
+    <form class="login" th:action="@{/index}" method="post" role="form">
+        <div class="form-container">
+            <div class="slide-controls">
+                <input type="radio" name="slide" id="user" checked>
+                <input type="radio" name="slide" id="facilityOwner">
+                <input type="radio" name="slide" id="staff">
+                <input type="radio" name="slide" id="admin">
+                <label for="user" class="slide">User</label>
+                <label for="facilityOwner" class="slide">Facility Owner</label>
+                <label for="staff" class="slide">Staff</label>
+                <label for="admin" class="slide">Admin</label>
+                <div class="slider-tab"></div>
+            </div>
+            <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" name="Submit" value="Login">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const userBtn = document.querySelector("label.user");
+    const facilityOwnerBtn = document.querySelector("label.facilityOwner");
+    const staffBtn = document.querySelector("label.staff");
+    const adminBtn = document.querySelector("label.admin");
+    userBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+    });
+    facilityOwnerBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-25%";
+        loginText.style.marginLeft = "-25%";
+    });
+    staffBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+    });
+    adminBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-75%";
+        loginText.style.marginLeft = "-75%";
+    });
+</script>
+
+</body>
+</html>
