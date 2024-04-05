@@ -20,8 +20,16 @@ public class UserController {
         return "Home";
     }
     @PostMapping("/login")
-    public String handleSelection(@ModelAttribute("user") User user, Model model) {
-        return "login";
+    public String login(@ModelAttribute("user") User user, Model model) {
+        User existingUser = userrepo.findByEmail(user.getEmail());
+        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+            // Successful login
+            return "regis"; // Redirect to dashboard or any other page after successful login
+        } else {
+            // Failed login
+            model.addAttribute("error", "Invalid email or password");
+            return "login"; // Return to the login page with an error message
+        }
     }
 
     @GetMapping("/login")
