@@ -9,6 +9,22 @@
 <body>
 <div class="container">
     <h1 class="text-center my-4">Sports Facilities</h1>
+    <form th:action="@{/filtered}" method="post">
+        <div class="mb-3">
+            <label for="locationFilter" class="form-label">Filter by Location:</label>
+            <select id="locationFilter" name="location" class="form-select">
+                <option value="">Select a location</option>
+                <!-- Populate dropdown with unique locations -->
+                <th:block th:each="location : ${locations}">
+                    <option th:text="${location}"></option>
+                </th:block>
+            </select>
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
+        </div>
+    </form>
+    <form th:action="@{/sorted}" method="post">
+        <button type="submit" name="sortCriteria" value="capacity" class="btn btn-primary">Sort by Capacity</button>
+    </form>
 <!--    <a class="btn btn-primary" href="/recipes/create"></a>-->
     <table class="table">
         <thead>
