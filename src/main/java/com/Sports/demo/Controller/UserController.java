@@ -28,7 +28,11 @@ public class UserController {
 //        model.addAttribute("user", users);
         return "Home";
     }
-
+@PostMapping("/index")
+public String dummy()
+{
+    return "redirect:/login";
+}
     @PostMapping("/login")
     public String login(@ModelAttribute("user") User user, Model model) {
         User existingUser = userrepo.findByEmail(user.getEmail());
