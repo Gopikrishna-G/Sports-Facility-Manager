@@ -11,18 +11,15 @@
     <div class="title-text">
         <div class="title">Sports Facility</div>
     </div>
-    <form class="login" th:action="@{/index}" method="post" role="form">
+    <form class="login" method="post" role="form" onsubmit="return updateFormAction()">
         <div class="form-container">
-            <div class="slide-controls">
-                <input type="radio" name="slide" id="user" checked>
-                <input type="radio" name="slide" id="facilityOwner">
-                <input type="radio" name="slide" id="staff">
-                <input type="radio" name="slide" id="admin">
-                <label for="user" class="slide">User</label>
-                <label for="facilityOwner" class="slide">Facility Owner</label>
-                <label for="staff" class="slide">Staff</label>
-                <label for="admin" class="slide">Admin</label>
-                <div class="slider-tab"></div>
+            <div class="field">
+                <select name="type" id="loginType">
+                    <option value="login">User</option>
+                    <option value="Ownerlogin">Facility Owner</option>
+                    <option value="stafflogin">Staff</option>
+                    <option value="adminlogin">Admin</option>
+                </select>
             </div>
             <div class="field btn">
                 <div class="btn-layer"></div>
@@ -33,6 +30,12 @@
 </div>
 
 <script>
+    function updateFormAction() {
+        var selectedValue = document.getElementById("loginType").value;
+        document.querySelector(".login").action = "/" + selectedValue;
+        return true; // You can also return false if you want to prevent the form from submitting
+    }
+
     const loginText = document.querySelector(".title-text .login");
     const loginForm = document.querySelector("form.login");
     const userBtn = document.querySelector("label.user");
