@@ -1,43 +1,48 @@
 package com.Sports.demo.Controller;
 
 import com.Sports.demo.Repo.Facilityrepo;
+import com.Sports.demo.Repo.Requestrepo;
 import com.Sports.demo.Repo.UserRepo;
+import com.Sports.demo.models.Request;
 import com.Sports.demo.models.SportsFacility;
 import com.Sports.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
+@SessionAttributes("loggedInUser")
 public class UserController {
+
     @Autowired
-    UserRepo userrepo;
+    private UserRepo userRepo;
+
     @Autowired
-    Facilityrepo facrepo;
+    private Facilityrepo facrepo;
+
+    @Autowired
+    private Requestrepo reqrepo;
 
     @GetMapping("/")
     public String getHomePage() {
-//        List<User> users= userrepo.findAll();
-//        model.addAttribute("user", users);
         return "Home";
     }
-@PostMapping("/index")
-public String dummy()
-{
-    return "redirect:/login";
-}
+
+    @PostMapping("/index")
+    public String dummy() {
+        return "login";
+    }
+
     @PostMapping("/login")
     public String login(@ModelAttribute("user") User user, Model model) {
-        User existingUser = userrepo.findByEmail(user.getEmail());
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            // Successful login
+        User existingUser = userRepo.findByEmail(user.getEmail());
+        if (existingUser != null && existingUser.getPassword() != null && existingUser.getPassword().equals(user.getPassword())) {
+            model.addAttribute("loggedInUser", existingUser);
             return "redirect:/display"; // Redirect to dashboard or any other page after successful login
         } else {
             // Failed login
@@ -47,37 +52,35 @@ public String dummy()
     }
 
     @GetMapping("/login")
-    public String getRegPage(@ModelAttribute User user) {
-//        List<User> users= userrepo.findAll();
-//        model.addAttribute("user", users);
+    public String getLoginPage(Model model) {
+        model.addAttribute("user", new User());
         return "login";
     }
 
     @PostMapping("/registration")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
         // Check if the email is already in use
-        User existingUser = userrepo.findByEmail(user.getEmail());
+        User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser != null) {
             // Email is already taken
             model.addAttribute("error", "Email is already taken. Please choose a different email.");
             return "login"; // Return to the registration page with an error message
         } else {
             // Save the user if email is not taken
-            userrepo.save(user);
+            userRepo.save(user);
             model.addAttribute("message", "Registration successful. You will be redirected to the login page.");
-            return "redirect:/display";
+            return "redirect:/login";
         }
     }
 
     @GetMapping("/display")
-    public String showSportsList(Model model) {
+    public String showSportsList(Model model, @ModelAttribute("user") User user) {
         List<SportsFacility> sports = facrepo.findAll();
         List<String> uniqueLocations = facrepo.findDistinctLocations();
         model.addAttribute("locations", uniqueLocations);
         model.addAttribute("sports", sports);
         return "display";
     }
-
 
     @PostMapping("/filtered")
     public String showSportsList(Model model, @RequestParam(required = false) String location) {
@@ -108,4 +111,52 @@ public String dummy()
         return "display";
     }
 
+    @PostMapping("/book")
+    public String bookFacility(@RequestParam("id") Integer id, @ModelAttribute("user") User user, Model model) {
+        Optional<SportsFacility> facilityOptional = facrepo.findById(id);
+        if (facilityOptional.isPresent()) {
+            SportsFacility facility = facilityOptional.get();
+            model.addAttribute("facility", facility);
+            model.addAttribute("user", user); // Pass the user object to the book page
+            return "book"; // Return the name of the HTML page to display booking details
+        } else {
+            // Facility not found
+            return "error"; // Redirect to an error page or handle the error accordingly
+        }
+    }
+
+    @PostMapping("/requestSlot")
+    public String requestSlot(@RequestParam("facilityId") Integer facilityId,
+                              @RequestParam("slot") String slot,
+                              @ModelAttribute("loggedInUser") User loggedInUser,
+                              Model model) {
+        // Retrieve facility object from the repository using the facility ID
+        SportsFacility facility = facrepo.findById(facilityId).orElse(null);
+
+        // Check if facility exists
+        if (facility != null && loggedInUser != null) {
+            // Create a new request
+            Request request = new Request();
+
+            // Set facility, user, slot, and status for the request
+            request.setFacility(facility);
+            request.setUser(loggedInUser);
+            request.setSlot(slot);
+            request.setStatus("pending");
+
+            // Save the request
+            reqrepo.save(request);
+
+            // Redirect to some confirmation page or any other appropriate page
+            return "redirect:/confirmation";
+        } else {
+            // Facility not found, handle accordingly
+            return "error";
+        }
+    }
+
+    @GetMapping("/confirmation")
+    public String showBookingPage(Model model) {
+        return "confirmation"; // Assuming you have a book.html template for displaying booking details
+    }
 }

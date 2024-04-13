@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,6 @@
     <form th:action="@{/sorted}" method="post">
         <button type="submit" name="sortCriteria" value="capacity" class="btn btn-primary">Sort by Capacity</button>
     </form>
-<!--    <a class="btn btn-primary" href="/recipes/create"></a>-->
     <table class="table">
         <thead>
         <tr>
@@ -33,18 +32,24 @@
             <th>Location</th>
             <th>Name</th>
             <th>Capacity</th>
+            <th>Action</th>
         </tr>
-
         </thead>
         <tbody>
-
-        <!-- Iterate over each cinema object and display its data -->
+        <!-- Iterate over each sports facility object and display its data -->
         <tr th:each="sports : ${sports}">
             <td th:text="${sports.id}"></td>
             <td th:text="${sports.location}"></td>
             <td th:text="${sports.name}"></td>
             <td th:text="${sports.capacity}"></td>
-
+            <td>
+                <!-- Form for booking -->
+                <form th:action="@{/book}" method="post">
+                    <!-- Hidden input field to store the ID of the sports facility -->
+                    <input type="hidden" name="id" th:value="${sports.id}" />
+                    <button type="submit" class="btn btn-success">Book</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -11,6 +11,18 @@
 <p>Location: <span th:text="${facility.location}"></span></p>
 <p>Name: <span th:text="${facility.name}"></span></p>
 <p>Capacity: <span th:text="${facility.capacity}"></span></p>
+<p>User ID: <span th:text="${loggedInUser.id}"></span></p>
+<p>User ID: <span th:text="${loggedInUser.name}"></span></p>
+<form th:action="@{/requestSlot}" method="post">
+    <p>Select a Slot:</p>
+    <select name="slot">
+        <option value="Morning">Morning (9-11)</option>
+        <option value="Afternoon">Afternoon (1-3)</option>
+        <option value="Evening">Evening (5-7)</option>
+    </select>
+    <input type="hidden" name="facilityId" th:value="${facility.id}" />
+    <button type="submit">Request Slot</button>
+</form>
 
 </body>
 </html>
