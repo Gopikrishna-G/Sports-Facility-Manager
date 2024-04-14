@@ -43,13 +43,29 @@ public class UserController {
         User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser != null && existingUser.getPassword() != null && existingUser.getPassword().equals(user.getPassword())) {
             model.addAttribute("loggedInUser", existingUser);
-            return "redirect:/display"; // Redirect to dashboard or any other page after successful login
+
+            // Check if the user has any pending requests
+            List<Request> pendingRequests = reqrepo.findByUserIdAndStatus(existingUser.getId(), "pending");
+            if (!pendingRequests.isEmpty()) {
+                return "redirect:/confirmation"; // Redirect to confirmation page
+            }
+
+            // Check if the user has any accepted requests
+            List<Request> acceptedRequests = reqrepo.findByUserIdAndStatus(existingUser.getId(), "accepted");
+            if (!acceptedRequests.isEmpty()) {
+                return "redirect:/accepted"; // Redirect to accepted page
+            }
+
+            // No requests found, display the default page
+            return "redirect:/display"; // Redirect to display page
         } else {
             // Failed login
             model.addAttribute("error", "Invalid email or password");
             return "login"; // Return to the login page with an error message
         }
     }
+
+
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
