@@ -1,11 +1,7 @@
 package com.Sports.demo.Controller;
 
-import com.Sports.demo.Repo.Facilityrepo;
-import com.Sports.demo.Repo.Requestrepo;
-import com.Sports.demo.Repo.UserRepo;
-import com.Sports.demo.models.Request;
-import com.Sports.demo.models.SportsFacility;
-import com.Sports.demo.models.User;
+import com.Sports.demo.Repo.*;
+import com.Sports.demo.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +56,7 @@ public class UserController {
             return "redirect:/display"; // Redirect to display page
         } else {
             // Failed login
-            model.addAttribute("error", "Invalid email or password");
+            model.addAttribute("error", "Invalid email or password \n register if you don't have an account");
             return "login"; // Return to the login page with an error message
         }
     }

@@ -16,6 +16,11 @@ public class Staff {
     private String city;
     private String email;
 
+    public String getPhoneno() { return phoneno; }
+
+    public void setPhoneno(String phoneno) { this.phoneno = phoneno; }
+    private String phoneno;
+
     public String getEmail() {
         return email;
     }

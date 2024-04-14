@@ -1,21 +1,11 @@
 package com.Sports.demo.Controller;
 
-import com.Sports.demo.Repo.AdminRepo;
-import com.Sports.demo.Repo.StaffRepo;
-import com.Sports.demo.Repo.Facilityrepo;
-import com.Sports.demo.Repo.UserRepo;
-import com.Sports.demo.models.Admin;
-import com.Sports.demo.Repo.FacilityOwnerRepo;
-import com.Sports.demo.models.SportsFacility;
-import com.Sports.demo.models.Staff;
-import com.Sports.demo.models.User;
+import com.Sports.demo.Repo.*;
+import com.Sports.demo.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;

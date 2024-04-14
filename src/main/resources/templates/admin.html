@@ -10,36 +10,308 @@
 <body>
 <div class="container">
   <h1 class="text-center my-4">Sports Facilities</h1>
-  <form th:action="@{/filtered}" method="post">
-    <div class="mb-3">
-      <label for="locationFilter" class="form-label">Filter by Location:</label>
-      <select id="locationFilter" name="location" class="form-select">
-        <option value="">Select a location</option>
-        <!-- Populate dropdown with unique locations -->
-        <th:block th:each="location : ${locations}">
-          <option th:text="${location}"></option>
-        </th:block>
-      </select>
-      <button type="submit" class="btn btn-primary">Apply Filter</button>
-    </div>
-  </form>
-  <form th:action="@{/sorted}" method="post">
-    <button type="submit" name="sortCriteria" value="capacity" class="btn btn-primary">Sort by Capacity</button>
-  </form>
-  <!--    <a class="btn btn-primary" href="/recipes/create"></a>-->
+
+  <h2 class="text-center my-4">Users Table</h2>
   <table>
     <tr>
       <th>User ID</th>
+      <th>User Username</th>
       <th>User Name</th>
-      <!-- Add more columns as needed -->
+      <th>User Email</th>
+      <th>User Password</th>
+      <th>User PhoneNo</th>
+      <th>User City</th>
     </tr>
     <tr th:each="user : ${users}">
       <td th:text="${user.id}"></td>
+      <td th:text="${user.username}"></td>
       <td th:text="${user.name}"></td>
-      <!-- Add more data as needed -->
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.password}"></td>
+      <td th:text="${user.phoneNo}"></td>
+      <td th:text="${user.city}"></td>
     </tr>
   </table>
+
+  <form action="/addUser" method="post">
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="name" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="phoneNo" placeholder="Phone number" maxlength="10">
+    <button type="submit">Add User</button>
+  </form>
+
+  <!-- Delete User Form -->
+  <form action="/deleteUser" method="post">
+    <input type="text" name="userId" placeholder="User ID">
+    <button type="submit">Delete User</button>
+  </form>
+
+  <!-- Modify User Form -->
+  <form action="/modifyUser" method="post">
+    <select id="userId" name="id" onchange="loadUserData(this.value)">
+      <option value="">Select User ID</option>
+      <!-- Add an option for each user ID -->
+      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.id}"></option>
+    </select>
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="name" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <button type="submit">Modify User</button>
+  </form>
+
+  <h2 class="text-center my-4">Facility Owner Table</h2>
+  <table>
+    <tr>
+      <th>Owner ID</th>
+      <th>Owner Username</th>
+      <th>Owner Name</th>
+      <th>Owner Email</th>
+      <th>Owner Password</th>
+      <th>Owner PhoneNo</th>
+      <th>Owner City</th>
+      <th>Number of Facilities</th>
+    </tr>
+    <tr th:each="owner : ${owners}">
+      <td th:text="${owner.id}"></td>
+      <td th:text="${owner.username}"></td>
+      <td th:text="${owner.fullname}"></td>
+      <td th:text="${owner.email}"></td>
+      <td th:text="${owner.password}"></td>
+      <td th:text="${owner.phoneno}"></td>
+      <td th:text="${owner.city}"></td>
+      <td th:text="${owner.numoffacility}"></td>
+    </tr>
+  </table>
+
+  <form action="/addOwner" method="post">
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="fullname" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="City" placeholder="City">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <input type="number" name="numoffacility" placeholder="Number of facilities">
+    <button type="submit">Add Owner</button>
+  </form>
+
+  <!-- Delete User Form -->
+  <form action="/deleteOwner" method="post">
+    <input type="text" name="ownerId" placeholder="Owner ID">
+    <button type="submit">Delete Owner</button>
+  </form>
+
+  <!-- Modify User Form -->
+  <form action="/modifyOwner" method="post">
+    <select id="ownerId" name="id" onchange="loadOwnerData(this.value)">
+      <option value="">Select Owner ID</option>
+      <!-- Add an option for each user ID -->
+      <option th:each="owner : ${owners}" th:value="${owner.id}" th:text="${owner.id}"></option>
+    </select>
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="fullname" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="City" placeholder="City">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <input type="number" name="numoffacility" placeholder="Number of facilities">
+    <button type="submit">Modify Owner</button>
+  </form>
+
+  <h2 class="text-center my-4">Staff Table</h2>
+  <table>
+    <tr>
+      <th>Staff ID</th>
+      <th>Staff Username</th>
+      <th>Staff Name</th>
+      <th>Staff Email</th>
+      <th>Staff Password</th>
+      <th>Staff Phone</th>
+      <th>Staff City</th>
+      <th>Facility Name</th>
+    </tr>
+    <tr th:each="staff : ${staffs}">
+      <td th:text="${staff.id}"></td>
+      <td th:text="${staff.username}"></td>
+      <td th:text="${staff.fullname}"></td>
+      <td th:text="${staff.email}"></td>
+      <td th:text="${staff.password}"></td>
+      <td th:text="${staff.phoneno}"></td>
+      <td th:text="${staff.city}"></td>
+      <td th:text="${staff.facilityname}"></td>
+    </tr>
+  </table>
+
+  <form action="/addStaff" method="post">
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="fullname" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <input type="text" name="facilityname" placeholder="Facility Name">
+    <button type="submit">Add Staff</button>
+  </form>
+
+  <!-- Delete User Form -->
+  <form action="/deleteStaff" method="post">
+    <input type="text" name="staffId" placeholder="Staff ID">
+    <button type="submit">Delete Staff</button>
+  </form>
+
+  <!-- Modify User Form -->
+  <form action="/modifyStaff" method="post">
+    <select id="staffId" name="id" onchange="loadStaffData(this.value)">
+      <option value="">Select Staff ID</option>
+      <!-- Add an option for each user ID -->
+      <option th:each="staff : ${staffs}" th:value="${staff.id}" th:text="${staff.id}"></option>
+    </select>
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="fullname" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <input type="text" name="facilityname" placeholder="Facility Name">
+    <button type="submit">Modify Staff</button>
+  </form>
+
+  <h2 class="text-center my-4">Admin Table</h2>
+  <table>
+    <tr>
+      <th>Admin ID</th>
+      <th>Admin Username</th>
+      <th>Admin Name</th>
+      <th>Admin Email</th>
+      <th>Admin Password</th>
+      <th>Admin PhoneNo</th>
+    </tr>
+    <tr th:each="admin : ${admins}">
+      <td th:text="${admin.id}"></td>
+      <td th:text="${admin.username}"></td>
+      <td th:text="${admin.fullname}"></td>
+      <td th:text="${admin.email}"></td>
+      <td th:text="${admin.password}"></td>
+      <td th:text="${admin.phoneno}"></td>
+    </tr>
+  </table>
+
+  <form action="/addAdmin" method="post">
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="fullname" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <button type="submit">Add Admin</button>
+  </form>
+
+  <!-- Delete User Form -->
+  <form action="/deleteAdmin" method="post">
+    <input type="text" name="adminId" placeholder="Admin ID">
+    <button type="submit">Delete Admin</button>
+  </form>
+
+  <!-- Modify User Form -->
+  <form action="/modifyAdmin" method="post">
+    <select id="adminId" name="id" onchange="loadAdminData(this.value)">
+      <option value="">Select Admin ID</option>
+      <!-- Add an option for each user ID -->
+      <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.id}"></option>
+    </select>
+    <input type="text" name="username" placeholder="User Name">
+    <input type="text" name="fullname" placeholder="Full name">
+    <input type="password" name="password" placeholder="New password">
+    <input type="email" name="email" placeholder="Enter email ID">
+    <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
+    <button type="submit">Modify Admin</button>
+  </form>
+
+
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse; /* Collapse borders */
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid black; /* Add border to table cells */
+      padding: 8px; /* Add some padding */
+      text-align: left; /* Align text to left */
+    }
+    th {
+      background-color: #f2f2f2; /* Add background color to headers */
+      font-weight: bold; /* Make headers bold */
+    }
+  </style>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+
+  function loadUserData(userId) {
+    // Make an AJAX request to your server to fetch the user data
+    // On success, populate the form fields with the user data
+    fetch('/getUserData?id=' + userId)
+            .then(response => response.json())
+            .then(user => {
+              document.getElementById('username').value = user.username;
+              document.getElementById('name').value = user.name;
+              document.getElementById('email').value = user.email;
+              document.getElementById('city').value = user.city;
+              document.getElementById('phoneNo').value = user.phoneNo;
+              document.getElementById('password').value = user.password;
+            });
+  }
+
+  function loadOwnerData(ownerId) {
+    // Make an AJAX request to your server to fetch the user data
+    // On success, populate the form fields with the user data
+    fetch('/getOwnerData?id=' + ownerId)
+            .then(response => response.json())
+            .then(owner => {
+              document.getElementById('username').value = owner.username;
+              document.getElementById('fullname').value = owner.fullname;
+              document.getElementById('email').value = owner.email;
+              document.getElementById('City').value = owner.City;
+              document.getElementById('phoneno').value = owner.phoneno;
+              document.getElementById('password').value = owner.password;
+              document.getElementById('numoffacility').value = owner.numoffacility;
+            });
+  }
+
+  function loadStaffData(staffId) {
+    // Make an AJAX request to your server to fetch the user data
+    // On success, populate the form fields with the user data
+    fetch('/getStaffData?id=' + staffId)
+            .then(response => response.json())
+            .then(staff => {
+
+              document.getElementById('username').value = staff.username;
+              document.getElementById('fullname').value = staff.fullname;
+              document.getElementById('email').value = staff.email;
+              document.getElementById('city').value = staff.city;
+              document.getElementById('phoneno').value = staff.phoneno;
+              document.getElementById('password').value = staff.password;
+              document.getElementById('facilityname').value = staff.facilityname;
+            })
+  }
+
+  function loadAdminData(adminId) {
+    // Make an AJAX request to your server to fetch the user data
+    // On success, populate the form fields with the user data
+    fetch('/getAdminData?id=' + adminId)
+            .then(response => response.json())
+            .then(admin => {
+              document.getElementById('username').value = admin.username;
+              document.getElementById('fullname').value = admin.fullname;
+              document.getElementById('email').value = admin.email;
+              document.getElementById('phoneno').value = admin.phoneno;
+              document.getElementById('password').value = admin.password;
+            })
+  }
+</script>
 </body>
 </html>
