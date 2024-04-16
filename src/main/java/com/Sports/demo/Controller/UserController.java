@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+
 import java.util.Optional;
 
 @Controller
 @SessionAttributes("loggedInUser")
+
 public class UserController {
 
     @Autowired
@@ -170,5 +172,10 @@ public class UserController {
     @GetMapping("/confirmation")
     public String showBookingPage(Model model) {
         return "confirmation"; // Assuming you have a book.html template for displaying booking details
+    }
+
+    @GetMapping("/accepted")
+    public String showAcceptPage(Model model){
+        return "accepted";
     }
 }

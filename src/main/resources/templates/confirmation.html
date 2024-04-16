@@ -2,9 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            background: url(background.png) no-repeat center center fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent vertical scrollbar */
+        }
+        .text-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 80%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 0; /* Remove default margin */
+        }
+        img {
+            max-width: 100%; /* Ensure the image doesn't exceed the container width */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
 <body>
-  Request sent!
+<div class="text-section">
+    <h1>Thank you for your request 🙏!</h1>
+    <h1>Your request is being processed! </h1>
+    <h1> We kindly request your patience!</h1>
+</div>
 </body>
 </html>

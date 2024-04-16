@@ -23,14 +23,6 @@
         <div class="form-inner">
             <form th:action="@{/login}" class="login" method="post">
                 <div class="field">
-                    <select name="type">
-                        <option value="User">User</option>
-                        <option value="Facility Owner">Facility Owner</option>
-                        <option value="Staff">Staff</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="field">
                     <input type="text" name="email" placeholder="Email" required>
                 </div>
                 <div class="field">
@@ -44,23 +36,16 @@
             </form>
             <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
                 <div class="field">
-                    <select name="type">
-                        <option value="User">User</option>
-                        <option value="Facility Owner">Facility Owner</option>
-                        <option value="Staff">Staff</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <input th:field="*{username}" type="text" name="username" placeholder="User ID">
+                    <input th:field="*{username}" type="text" name="username" placeholder="Username">
                 </div>
 
                 <div class="field">
                     <input th:field="*{name}" type="text" name="name" placeholder="Full name">
                 </div>
                 <div class="field">
-                    <input th:field="*{password}" type="password" name="password" placeholder="New password"></div>
+                    <input th:field="*{password}" type="password" name="password" placeholder="Password"></div>
                 <div class="field">
-                    <input th:field="*{email}" type="email" name="email" placeholder="Enter email ID"></div>
+                    <input th:field="*{email}" type="email" name="email" placeholder="Email ID"></div>
                 <div class="field">
                     <input th:field="*{city}" type="text" name="city" placeholder="City"></div>
                 <div class="field">
