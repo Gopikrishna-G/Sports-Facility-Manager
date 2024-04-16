@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <style>
+        .field1 {
+            margin-bottom: 20px;
+            position: relative;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
     <meta charset="utf-8">
     <title>Sports Facility</title>
     <link rel="stylesheet" href="style.css">
@@ -22,14 +33,9 @@
         </div>
         <div class="form-inner">
             <form th:action="@{/Ownerlogin}" class="login" method="post">
-<!--                <div class="field">-->
-<!--                    <select name="type">-->
-<!--                        <option value="User">User</option>-->
-<!--                        <option value="Facility Owner">Facility Owner</option>-->
-<!--                        <option value="Staff">Staff</option>-->
-<!--                        <option value="Admin">Admin</option>-->
-<!--                    </select>-->
-<!--                </div>-->
+                <div class="field1">
+                    Facility Owner
+                </div>
                 <div class="field">
                     <input type="text" name="email" placeholder="Email" required>
                 </div>

@@ -3,6 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Owner Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 <h2>Welcome Owner!</h2>
@@ -10,29 +81,29 @@
 <h3>Add Ground:</h3>
 <form action="/addGround" method="post">
     <label for="location">Location:</label>
-    <input type="text" id="location" name="location" required><br><br>
+    <input type="text" id="location" name="location" required><br>
     <label for="game">Game:</label>
-    <input type="text" id="game" name="game" required><br><br>
+    <input type="text" id="game" name="game" required><br>
     <label for="facilityType">Facility Type:</label>
-    <input type="text" id="facilityType" name="facilityType" required><br><br>
-    <label for="numoffacility">Number of Facilities:</label>
-    <input type="number" id="numoffacility" name="numoffacility" required><br><br>
+    <input type="text" id="facilityType" name="facilityType" required><br>
+    <label for="numoffacility" >Number of Facilities:</label>
+    <input type="number" id="numoffacility" name="numoffacility" min="1" max="50" required><br>
     <button type="submit">Add Ground</button>
 </form>
 <!-- Display Grounds -->
-<h3>Grounds Information:</h3>
-<table>
-    <thead>
-    <tr>
-        <th>Location</th>
-        <th>Game</th>
-        <th>Facility Type</th>
-        <th>Number of Facilities</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Fetch and display grounds information here -->
-    </tbody>
-</table>
+<!--<h3>Grounds Information:</h3>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Location</th>-->
+<!--        <th>Game</th>-->
+<!--        <th>Facility Type</th>-->
+<!--        <th>Number of Facilities</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    &lt;!&ndash; Fetch and display grounds information here &ndash;&gt;-->
+<!--    </tbody>-->
+<!--</table>-->
 </body>
 </html>

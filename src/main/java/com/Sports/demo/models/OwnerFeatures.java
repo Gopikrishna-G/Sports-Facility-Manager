@@ -1,6 +1,10 @@
 package com.Sports.demo.models;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 //import javax.persistence.*;
 
@@ -69,6 +73,8 @@ public class OwnerFeatures {
 
     private String facilityType;
     private int numoffacility;
+
+
 
     // Getters and setters
 }
