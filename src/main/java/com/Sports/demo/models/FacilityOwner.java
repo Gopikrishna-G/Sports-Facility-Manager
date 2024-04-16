@@ -23,6 +23,7 @@ public class FacilityOwner {
     private String password;
     private String fullname;
 
+
     public int getId() {
         return id;
     }
