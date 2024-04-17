@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        span {
+            font-weight: bold;
+            color: #007bff;
+        }
+        span.data {
+            color: #333;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>User Profile</h1>
+    <p>Welcome, <span class="data" th:text="${loggedInOwner.fullname}">Username</span>!</p>
+    <ul>
+        <li><span>Username:</span> <span class="data" th:text="${loggedInOwner.username}">Name</span></li>
+        <li><span>Email:</span> <span class="data" th:text="${loggedInOwner.email}">Email</span></li>
+        <li><span>Phone Number:</span> <span class="data" th:text="${loggedInOwner.phoneno}">Phone Number</span></li>
+        <li><span>City:</span> <span class="data" th:text="${loggedInOwner.city}">City</span></li>
+    </ul>
+</div>
+</body>
+</html>
