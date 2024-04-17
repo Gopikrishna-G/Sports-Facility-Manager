@@ -13,7 +13,7 @@ import java.util.List;
 public class OwnerFeatures {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private int facility_id;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -23,12 +23,22 @@ public class OwnerFeatures {
     private String location;
     private String game;
 
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    private int cost;
+
     public int getId() {
-        return id;
+        return facility_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.facility_id = id;
     }
 
     public FacilityOwner getOwner() {

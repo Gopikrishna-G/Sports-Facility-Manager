@@ -2,10 +2,9 @@ package com.Sports.demo.Controller;
 
 import com.Sports.demo.Repo.Facilityrepo;
 import com.Sports.demo.Repo.FacilityOwnerRepo;
+import com.Sports.demo.Repo.UserRepo;
 import com.Sports.demo.Repo.ownerfacilityrepo;
-import com.Sports.demo.models.OwnerFeatures;
-import com.Sports.demo.models.SportsFacility;
-import com.Sports.demo.models.FacilityOwner;
+import com.Sports.demo.models.*;
 import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +19,15 @@ import java.util.List;
 @SessionAttributes("loggedInOwner")
 public class OwnerController {
     @Autowired
+    UserRepo playerrepo;
+    @Autowired
     FacilityOwnerRepo userrepo;
     @Autowired
     Facilityrepo facrepo;
     @Autowired
     ownerfacilityrepo f1repo;
+    @Autowired
+    Facilityrepo sp;
     @PostMapping("/Ownerlogin")
     public String login(@ModelAttribute("facilityOwner") FacilityOwner facilityOwner, Model model) {
         FacilityOwner existingUser = userrepo.findByEmail(facilityOwner.getEmail());
@@ -50,7 +53,7 @@ public class OwnerController {
     {
         userrepo.save(facilityOwner);
         model.addAttribute("message","Registration successful \n You will be redirected to login page");
-        return "/OwnerHome";
+        return "Owner_Home/home";
     }
     @GetMapping("/OwnerDisplay")
     public String getDisplayPage(@ModelAttribute("facilityOwner") FacilityOwner facilityOwner, Model model){
@@ -74,11 +77,17 @@ public class OwnerController {
     @PostMapping("/addGround")
     public String addGround(@ModelAttribute("ownerFeatures") OwnerFeatures ownerFeatures,
                             @ModelAttribute("loggedInOwner") FacilityOwner loggedInOwner,
+                            @ModelAttribute("sports") SportsFacility sports,
                             Model model){
         if(loggedInOwner != null){
             ownerFeatures.setOwner(loggedInOwner);
             f1repo.save(ownerFeatures);
             model.addAttribute("message","Registration successful \n You will be redirected to login page");
+            sports.setId(ownerFeatures.getId());
+            sports.setLocation(ownerFeatures.getLocation());
+            sports.setCapacity(ownerFeatures.getCost());
+            sports.setName(ownerFeatures.getGame());
+            sp.save(sports);
 //        // After saving, you can redirect to the home page or any other page as needed
             return "redirect:/OwnerDisplay";
         }
@@ -109,7 +118,7 @@ public class OwnerController {
     public String profile(@ModelAttribute("loggedInOwner") FacilityOwner loggedInOwner, Model model){
         if(loggedInOwner!=null)
         {
-            FacilityOwner owner=userrepo.findByEmail(loggedInOwner.getEmail());
+//            FacilityOwner owner=userrepo.findByEmail(loggedInOwner.getEmail());
             model.addAttribute("loggedInOwner", loggedInOwner);
 //            System.out.print("")
             return "Owner_Home/profile";
@@ -118,7 +127,21 @@ public class OwnerController {
             return "Owner_Home/home";
         }
     }
-
+//    @GetMapping("/showRequests")
+//    public String reqshow(@ModelAttribute("loggedInOwner") FacilityOwner loggedInOwner,
+//                          @ModelAttribute("requests") Request req,
+//                          @ModelAttribute("ownerFeatures") OwnerFeatures ownerfeatures,
+//                          Model model){
+//        if(loggedInOwner!=null){
+//            User player=playerrepo.findByEmail() ;
+//            model.addAttribute("ownerFeatures",ownerfeatures);
+//            return "Owner_Home/showreq";
+////            return "error";
+//        }
+//        else{
+//            return "error";
+//        }
+//    }
 //
 //
 }

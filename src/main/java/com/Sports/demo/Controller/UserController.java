@@ -148,7 +148,7 @@ public class UserController {
         SportsFacility facility = facrepo.findById(facilityId).orElse(null);
 
         // Check if facility exists
-        if (facility != null && loggedInUser != null) {
+        if ( loggedInUser != null) {
             // Create a new request
             Request request = new Request();
 
