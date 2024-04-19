@@ -28,6 +28,8 @@ public class OwnerController {
     Requestrepo rq1repo;
     @Autowired
     Facilityrepo sp;
+    @Autowired
+    bookrepo bk;
     @PostMapping("/Ownerlogin")
     public String login(@ModelAttribute("facilityOwner") FacilityOwner facilityOwner, Model model) {
         FacilityOwner existingUser = userrepo.findByEmail(facilityOwner.getEmail());
@@ -155,6 +157,48 @@ public class OwnerController {
         } else {
             // If the user is not logged in, redirect to the home page
             return "Owner_Home/home";
+        }
+    }
+    @PostMapping("/approve")
+    public String approve(@RequestParam("requestId") int requestId, Model model) {
+        // Retrieve the request object from the repository based on the requestId
+        Request request = rq1repo.findById(requestId).orElse(null);
+
+        if (request != null) {
+            // Update the status of the request to "approved"
+            request.setStatus("approved");
+            rq1repo.save(request);
+            // Create a new booking entry using the information from the request
+            Booking booking = new Booking();
+            booking.setUser(request.getUser()); // Set user ID from the request
+            booking.setSportsFacility(request.getFacility()); // Set facility ID from the request
+            booking.setSlot(request.getSlot());
+            bk.save(booking);
+            return "redirect:/showRequests";
+        } else {
+            // Handle the case where the request is not found
+            model.addAttribute("error", "Request not found");
+            return "error"; // Define an errorPage view
+        }
+    }
+
+
+    @PostMapping("/deny")
+    public String deny(@RequestParam("requestId") int requestId, Model model) {
+        // Retrieve the request object from the repository based on the requestId
+        Request request = rq1repo.findById(requestId).orElse(null);
+
+        if (request != null) {
+            // Update the status of the request to "rejected"
+            request.setStatus("rejected");
+            rq1repo.save(request);
+
+            // Redirect to the showRequests page
+            return "redirect:/showRequests";
+        } else {
+            // Handle the case where the request is not found
+            model.addAttribute("error", "Request not found");
+            return "redirect:/OwnerHome"; // Define an errorPage view
         }
     }
 //

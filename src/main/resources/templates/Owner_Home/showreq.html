@@ -3,28 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <title>Requests</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-container {
+            background-image: url('background.png'); /* Change 'background.png' to your image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .text-box {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Custom button styling */
+        .btn-success, .btn-danger {
+            padding: 6px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+        }
+    </style>
 </head>
 <body>
-<h2>Requests</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Request ID</th>
-        <th>Facility ID</th>
-        <th>Details</th>
-        <!-- Add more headers if needed -->
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Iterate over the list of requests -->
-    <tr th:each="request : ${requests}">
-        <!-- Display request details -->
-        <td th:text="${request.id}">Request ID</td>
-        <td th:text="${request.facilityId}">Facility ID</td>
-        <td th:text="${request.details}">Details</td>
-        <!-- Add more columns for other request attributes -->
-    </tr>
-    </tbody>
-</table>
+<div class="background-container">
+    <div class="container">
+        <div class="text-box">
+            <h2>Filter by Status:</h2>
+            <select id="statusFilter">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>Facility ID</th>
+                <th>Facility name</th>
+                <th>Slot</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterate over the list of requests -->
+            <tr th:each="request : ${requests}" class="request-row">
+                <!-- Display request details -->
+                <td th:text="${request.id}">Request ID</td>
+                <td th:text="${request.facility.getId()}">Facility ID</td>
+                <td th:text="${request.facility.getName()}">Request name</td>
+                <td th:text="${request.slot}">Slot</td>
+                <td th:text="${request.status}">Status</td>
+                <!-- Add buttons for approve and deny -->
+                <td class="button-column">
+                    <form th:action="@{/approve}" method="post">
+                        <input type="hidden" name="requestId" th:value="${request.id}">
+                        <button class="btn btn-success" type="submit">Approve</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/deny}" method="post">
+                        <input type="hidden" name="requestId" th:value="${request.id}">
+                        <button class="btn btn-danger" type="submit">Deny</button>
+                    </form>
+                </td>
+                <!-- Add more columns for other request attributes -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById("statusFilter").addEventListener("change", function() {
+        var selectedStatus = this.value;
+        var rows = document.querySelectorAll(".request-row");
+
+        rows.forEach(function(row) {
+            var statusCell = row.querySelector("td:nth-child(5)");
+            var approveButton = row.querySelector(".btn-success");
+            var denyButton = row.querySelector(".btn-danger");
+
+            if (selectedStatus === "all" || statusCell.textContent.toLowerCase().includes(selectedStatus)) {
+                row.style.display = "";
+                if (statusCell.textContent.trim().toLowerCase() !== "pending") {
+                    // Hide buttons if status is not pending
+                    approveButton.style.display = "none";
+                    denyButton.style.display = "none";
+                } else {
+                    // Show buttons if status is pending
+                    approveButton.style.display = "";
+                    denyButton.style.display = "";
+                }
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

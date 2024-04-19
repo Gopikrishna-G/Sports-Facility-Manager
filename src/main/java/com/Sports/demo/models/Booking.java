@@ -19,8 +19,7 @@ public class Booking {
     @JoinColumn(name = "user_id",referencedColumnName = "id") // Name of the column in the booking table
     private User user;
 
-    private Date startTime;
-    private Date endTime;
+
 
     public int getBooking_id() {
         return booking_id;
@@ -28,30 +27,6 @@ public class Booking {
 
     public void setBooking_id(int booking_id) {
         this.booking_id = booking_id;
-    }
-
-    public SportsFacility getSportsFacility() {
-        return sportsFacility;
-    }
-
-    public void setSportsFacility(SportsFacility sportsFacility) {
-        this.sportsFacility = sportsFacility;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
     }
 
 
@@ -62,5 +37,23 @@ public class Booking {
     public void setUser(User user) {
         this.user = user;
     }
+
+
+    public SportsFacility getSportsFacility() {
+        return sportsFacility;
+    }
+
+    public void setSportsFacility(SportsFacility sportsFacility) {
+        this.sportsFacility = sportsFacility;
+    }
+    private String slot;
+    public String getSlot() {
+        return slot;
+    }
+
+    public void setSlot(String slot) {
+        this.slot = slot;
+    }
+
 
 }
