@@ -1,9 +1,6 @@
 package com.Sports.demo.Controller;
 
-import com.Sports.demo.Repo.Facilityrepo;
-import com.Sports.demo.Repo.FacilityOwnerRepo;
-import com.Sports.demo.Repo.UserRepo;
-import com.Sports.demo.Repo.ownerfacilityrepo;
+import com.Sports.demo.Repo.*;
 import com.Sports.demo.models.*;
 import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 //
 @Controller
@@ -26,6 +24,8 @@ public class OwnerController {
     Facilityrepo facrepo;
     @Autowired
     ownerfacilityrepo f1repo;
+    @Autowired
+    Requestrepo rq1repo;
     @Autowired
     Facilityrepo sp;
     @PostMapping("/Ownerlogin")
@@ -127,21 +127,36 @@ public class OwnerController {
             return "Owner_Home/home";
         }
     }
-//    @GetMapping("/showRequests")
-//    public String reqshow(@ModelAttribute("loggedInOwner") FacilityOwner loggedInOwner,
-//                          @ModelAttribute("requests") Request req,
-//                          @ModelAttribute("ownerFeatures") OwnerFeatures ownerfeatures,
-//                          Model model){
-//        if(loggedInOwner!=null){
-//            User player=playerrepo.findByEmail() ;
-//            model.addAttribute("ownerFeatures",ownerfeatures);
-//            return "Owner_Home/showreq";
-////            return "error";
-//        }
-//        else{
-//            return "error";
-//        }
-//    }
+    @GetMapping("/showRequests")
+    public String showRequests(@ModelAttribute("loggedInOwner") FacilityOwner loggedInOwner, Model model) {
+        if (loggedInOwner != null) {
+            // Find the owner_id associated with the logged-in owner
+            int ownerId = loggedInOwner.getId();
+
+            // Fetch ownerFeatures associated with the owner_id
+            List<OwnerFeatures> ownerFeatures = f1repo.findByOwnerId(ownerId);
+
+            // Create a list to hold the facility_ids belonging to the owner's facilities
+            List<Integer> facilityIds = new ArrayList<>();
+
+            // Extract facility_ids from ownerFeatures
+            for (OwnerFeatures feature : ownerFeatures) {
+                facilityIds.add(feature.getId());
+            }
+
+            // Fetch requests from the request table where facility_id is in the list of facilityIds
+            List<Request> requests = rq1repo.findByFacilityIdIn(facilityIds);
+
+            // Add requests to the model
+            model.addAttribute("requests", requests);
+
+            // Return the view where you want to display the requests
+            return "Owner_Home/showreq";
+        } else {
+            // If the user is not logged in, redirect to the home page
+            return "Owner_Home/home";
+        }
+    }
 //
 //
 }

@@ -9,4 +9,6 @@ import java.util.List;
 public interface Requestrepo extends JpaRepository<Request,Integer> {
     List<Request> findByUserId(Integer userId);
     List<Request> findByUserIdAndStatus(Integer userId, String status);
+
+    List<Request> findByFacilityIdIn(List<Integer> facilityIds);
 }

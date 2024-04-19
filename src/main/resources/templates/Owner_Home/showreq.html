@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sports Facility</title>
+    <title>Requests</title>
 </head>
 <body>
-    Sports facility requests
+<h2>Requests</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Request ID</th>
+        <th>Facility ID</th>
+        <th>Details</th>
+        <!-- Add more headers if needed -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of requests -->
+    <tr th:each="request : ${requests}">
+        <!-- Display request details -->
+        <td th:text="${request.id}">Request ID</td>
+        <td th:text="${request.facilityId}">Facility ID</td>
+        <td th:text="${request.details}">Details</td>
+        <!-- Add more columns for other request attributes -->
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -11,4 +11,6 @@ import java.util.List;
 public interface ownerfacilityrepo extends JpaRepository<OwnerFeatures, Integer> {
     // You can add custom query methods here if needed
     List<OwnerFeatures> findAllByOwnerId(int ownerId);
+
+    List<OwnerFeatures> findByOwnerId(int ownerId);
 }
