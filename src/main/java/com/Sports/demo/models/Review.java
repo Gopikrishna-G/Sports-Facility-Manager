@@ -37,7 +37,7 @@ public class Review {
     }
 
     public void setRating(int rating) {
-        if (rating >= 0 && rating <= 5) { // Ensure rating is between 0 and 5
+        if (rating >= 0 && rating <= 10) { // Ensure rating is between 0 and 5
             this.rating = rating;
         } else {
             throw new IllegalArgumentException("Rating must be between 0 and 5.");

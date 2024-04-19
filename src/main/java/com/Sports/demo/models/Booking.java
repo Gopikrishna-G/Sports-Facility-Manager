@@ -53,4 +53,14 @@ public class Booking {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

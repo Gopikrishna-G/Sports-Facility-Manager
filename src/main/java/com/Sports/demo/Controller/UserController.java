@@ -26,6 +26,12 @@ public class UserController {
     @Autowired
     private Requestrepo reqrepo;
 
+    @Autowired
+    private bookrepo bookingRepo;
+
+    @Autowired
+    private reviewrepo reviewRepo;
+
     @GetMapping("/")
     public String getHomePage() {
         return "Home";
@@ -178,4 +184,39 @@ public class UserController {
     public String showAcceptPage(Model model){
         return "accepted";
     }
+
+    @PostMapping("/reviewed")
+    public String acceptRequest(@RequestParam("rating") int rating,
+                                @RequestParam("comment") String comment,
+                                @ModelAttribute("loggedInUser") User loggedInUser,
+                                Model model) {
+        // Retrieve the booking associated with the user
+        Booking booking = bookingRepo.findByUserId(loggedInUser.getId());
+//        System.out.println(booking.getUser().getId());
+        // Check if booking exists and user is logged in
+        if (booking != null && loggedInUser != null) {
+            // Create a new review
+            Review review = new Review();
+
+            // Set the review details
+            review.setBooking(booking);
+            review.setRating(rating);
+            review.setComment(comment);
+
+            // Save the review
+            // Assuming you have a repository for Review named "reviewRepo"
+            reviewRepo.save(review);
+
+            // Redirect to some confirmation page or any other appropriate page
+            return "redirect:/done";
+        } else {
+            // Booking not found or user not logged in, handle accordingly
+            return "error";
+        }
+    }
+    @GetMapping("/done")
+    public String showDonePage(Model model){
+        return "done";
+    }
+
 }
