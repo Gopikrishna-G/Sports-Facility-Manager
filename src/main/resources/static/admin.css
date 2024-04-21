@@ -1,31 +1,128 @@
-html,body{
-    display: grid;
-    height: 100%;
-    width: 100%;
-    place-items: center;
-    background: #4CAF50;
-    -webkit-background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-    background-size: 100% 100%;
-    image-rendering: smooth;
+/* Reset default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
 }
 
-form {
-    margin-bottom: 20px; /* This adds a 20px gap below each form */
+/* Global Styles */
+body {
+    font-family: var(--font-family);
+    color: #333;
+    background-color: var(--background-color);
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.my-4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Table Styles */
 table {
     width: 100%;
-    border-collapse: collapse; /* Collapse borders */
-    margin-bottom: 20px; /* This adds a 20px gap below each form */
-    th, td{
-        border: 1px solid black; /* Add border to table cells */
-        padding: 8px; /* Add some padding */
-        text-align: left; /* Align text to left */
-    }
-    th {
-        background-color: #f2f2f2; /* Add background color to headers */
-        font-weight: bold; /* Make headers bold */
-    }
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid black; /* Apply black border to the table */
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid black; /* Apply black border to cells */
+}
+
+table tr {
+    border: 1px solid black; /* Apply black border to rows */
+}
+
+th {
+    background-color: var(--table-header-color);
+    font-weight: bold;
+}
+
+/* Form Styles */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid var(--table-border-color); /* Use table border color */
+    border-radius: var(--content-border-radius); /* Use content border radius */
+    transition: border-color 0.3s ease-in-out; /* Smooth border color transition */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Change border color on focus */
+}
+
+button[type="submit"] {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: var(--button-color);
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Dropdown Styles */
+select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--table-border-color); /* Use table border color */
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* Custom Variables */
+:root {
+    --primary-color: #74b9ff; /* Soft Blue */
+    --secondary-color: #6ab04c; /* Soft Green */
+    --tertiary-color: #f0932b; /* Soft Orange */
+    --font-family: "Arial", sans-serif;
+    --background-color: #f9f9f9; /* Light background */
+    --background-color-dark: #2d3436; /* Dark background */
+    --button-color: var(--primary-color); /* Button color */
+    --button-hover-color: #3498db; /* Lighter Blue */
+    --table-background-color: #fff; /* White */
+    --table-border-color: #000; /* Black */
+    --table-header-color: #f2f2f2; /* Table header background color */
+    --content-border-radius: 12px; /* Content area border radius */
+}
+
+/* Add Gradient Backgrounds */
+body {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+}
+
+.navigation a:hover {
+    background-color: var(--secondary-color);
+}
+
+button[type="submit"] {
+    background-color: var(--tertiary-color);
 }

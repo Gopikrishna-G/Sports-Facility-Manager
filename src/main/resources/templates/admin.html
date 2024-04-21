@@ -11,17 +11,17 @@
 <div class="container">
   <h1 class="text-center my-4">Sports Facilities</h1>
 
-  <div class="mb-3">
-    <label for="tableSelect" class="form-label">Select Table:</label>
-    <select class="form-select" id="tableSelect" onchange="showSelectedForm()">
-      <option value="">Select Table</option>
+  <div class="text-center my-4">
+    <label for="tableSelect">Select Table:</label>
+    <select id="tableSelect" onchange="showTable(this.value)">
       <option value="users">Users</option>
       <option value="owners">Facility Owners</option>
-      <option value="staffs">Staff</option>
+      <option value="staff">Staff</option>
       <option value="admins">Admins</option>
     </select>
   </div>
 
+  <div id="usersTable" style="display:none;">
   <h2 class="text-center my-4">Users Table</h2>
   <table>
     <tr>
@@ -75,7 +75,9 @@
     <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
     <button type="submit">Modify User</button>
   </form>
+  </div>
 
+  <div id="ownersTable" style="display:none;">
   <h2 class="text-center my-4">Facility Owner Table</h2>
   <table>
     <tr>
@@ -133,7 +135,9 @@
     <input type="number" name="numoffacility" placeholder="Number of facilities">
     <button type="submit">Modify Owner</button>
   </form>
+  </div>
 
+  <div id="staffTable" style="display:none;">
   <h2 class="text-center my-4">Staff Table</h2>
   <table>
     <tr>
@@ -191,7 +195,9 @@
     <input type="text" name="facilityname" placeholder="Facility Name">
     <button type="submit">Modify Staff</button>
   </form>
+  </div>
 
+  <div id="adminsTable" style="display:none;">
   <h2 class="text-center my-4">Admin Table</h2>
   <table>
     <tr>
@@ -241,10 +247,11 @@
     <input type="text" name="phoneno" placeholder="Phone number" maxlength="10">
     <button type="submit">Modify Admin</button>
   </form>
+  </div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
   function loadUserData(userId) {
     // Make an AJAX request to your server to fetch the user data
     // On success, populate the form fields with the user data
@@ -305,6 +312,17 @@
               document.getElementById('phoneno').value = admin.phoneno;
               document.getElementById('password').value = admin.password;
             })
+  }
+
+  function showTable(tableName) {
+    // Hide all table divs
+    document.getElementById('usersTable').style.display = 'none';
+    document.getElementById('ownersTable').style.display = 'none';
+    document.getElementById('staffTable').style.display = 'none';
+    document.getElementById('adminsTable').style.display = 'none';
+
+    // Show selected table div
+    document.getElementById(tableName + 'Table').style.display = 'block';
   }
 </script>
 </body>
