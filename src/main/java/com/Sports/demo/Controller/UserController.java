@@ -60,6 +60,11 @@ public class UserController {
                 return "redirect:/accepted"; // Redirect to accepted page
             }
 
+            List<Request> rejectedRequests = reqrepo.findByUserIdAndStatus(existingUser.getId(), "rejected");
+            if (!rejectedRequests.isEmpty()) {
+                return "redirect:/rejected"; // Redirect to accepted page
+            }
+
             // No requests found, display the default page
             return "redirect:/display"; // Redirect to display page
         } else {
@@ -67,6 +72,17 @@ public class UserController {
             model.addAttribute("error", "Invalid email or password \n register if you don't have an account");
             return "login"; // Return to the login page with an error message
         }
+    }
+
+    @GetMapping("/rejected")
+    public String handleRejection(Model model)
+    {
+        return "rejected";
+    }
+
+    @PostMapping("/reject")
+    public String handle(Model model) {
+        return "redirect:/display";
     }
 
 
@@ -206,6 +222,7 @@ public class UserController {
             // Save the review
             // Assuming you have a repository for Review named "reviewRepo"
             reviewRepo.save(review);
+//            model.addAttribute("booking",booking);
 
             // Redirect to some confirmation page or any other appropriate page
             return "redirect:/done";
