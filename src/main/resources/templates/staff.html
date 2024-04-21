@@ -27,12 +27,13 @@
             <th>User Phone No</th>
             <th>User City</th>
             <th>User Approved?</th>
+            <th>User Slot</th>
         </tr>
         </tr>
         <tr th:each="booking : ${bookings}">
             <td th:text="${booking.booking_id}"></td>
-            <td th:text="${booking.startTime}"></td>
-            <td th:text="${booking.endTime}"></td>
+<!--            <td th:text="${booking.startTime}"></td>-->
+<!--            <td th:text="${booking.endTime}"></td>-->
             <td th:text="${booking.sportsFacility.name}"></td>
             <td th:text="${booking.sportsFacility.location}"></td>
             <td th:text="${booking.user.name}"></td>
