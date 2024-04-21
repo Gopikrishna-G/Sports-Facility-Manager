@@ -24,6 +24,9 @@ public class StaffController {
     @Autowired
     Facilityrepo facrepo;
 
+    @Autowired
+    BookingRepo bookingRepo;
+
     @GetMapping("/stafflogin")
     public String getHomePage() {
 //        List<User> users= userrepo.findAll();
@@ -49,16 +52,16 @@ public class StaffController {
     }
 
     @GetMapping("/staff")
-    public String getRegPage(@ModelAttribute Staff staff) {
-//        List<User> users= userrepo.findAll();
-//        model.addAttribute("user", users);
-        return "staff";
-    }
-
-    @PostMapping("/staff")
-    public String displayUsers(Model model) {
+    public String getStaffPage(Model model) {
         List<User> users = userrepo.findAll();
         model.addAttribute("users", users);
+
+        List<Booking> bookings = bookingRepo.findAll();
+        model.addAttribute("bookings", bookings);
+
+        List<SportsFacility> facilities = facrepo.findAll();
+        model.addAttribute("facilities", facilities);
+
         return "staff";
     }
 }

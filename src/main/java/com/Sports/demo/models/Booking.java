@@ -15,11 +15,28 @@ public class Booking {
     @JoinColumn(name = "facility_id",referencedColumnName = "id") // Name of the column in the booking table
     private SportsFacility sportsFacility;
 
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user;}
+
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id") // Name of the column in the booking table
     private User user;
 
 
+
+    private enum Approved {yes, no}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "approved")
+    private Approved approved=Approved.no;
+
+    public Approved getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Approved approved) {
+        this.approved = approved;
+    }
 
     public int getBooking_id() {
         return booking_id;

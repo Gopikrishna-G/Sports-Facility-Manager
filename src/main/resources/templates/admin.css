@@ -3,7 +3,7 @@ html,body{
     height: 100%;
     width: 100%;
     place-items: center;
-    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), no-repeat center center fixed;
+    background: #4CAF50;
     -webkit-background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     -o-background-size: 100% 100%;
@@ -16,5 +16,16 @@ form {
 }
 
 table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders */
     margin-bottom: 20px; /* This adds a 20px gap below each form */
+    th, td{
+        border: 1px solid black; /* Add border to table cells */
+        padding: 8px; /* Add some padding */
+        text-align: left; /* Align text to left */
+    }
+    th {
+        background-color: #f2f2f2; /* Add background color to headers */
+        font-weight: bold; /* Make headers bold */
+    }
 }
