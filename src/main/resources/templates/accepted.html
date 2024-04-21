@@ -53,6 +53,7 @@
 <body>
 <center>
     <div class="form-container">
+        <h1>Welcome, <span class="data" th:text="${loggedInUser.name}">Username</span>!</h1>
         <h1>Your request is processed and is accepted! Please drop your ratings below:</h1>
         <form th:action="@{/reviewed}" method="post">
             <label for="comment">Comment:</label><br>

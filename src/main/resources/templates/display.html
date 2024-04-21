@@ -60,6 +60,7 @@
 </head>
 <body>
 <div class="container">
+    <h1>Welcome, <span class="data" th:text="${loggedInUser.name}">Username</span>!</h1>
     <div class="text-box"> <!-- Wrap your text content in a div with this class -->
         <h1 class="text-center my-4">Sports Facilities</h1>
         <form th:action="@{/filtered}" method="post">

@@ -38,9 +38,11 @@
 </head>
 <body>
 <div class="text-section">
-    <h1>Thank you for your using our service🙏!</h1>
-    <h1>We hope you had a great time enjoying the sport </h1>
+    <h1>Welcome, <span class="data" th:text="${loggedInUser.name}">Username</span>!</h1>
+    <h1> Thank you for your using our service🙏!</h1>
+    <h1> We hope you had a great time enjoying the sport </h1>
     <h1> Do visit us in the future!</h1>
+<!--    <h1> Use this Booking ID to verify with the staff at the facility:<span class="data" th:text="${booking.id}">Username</span></h1>-->
 </div>
 </body>
 </html>

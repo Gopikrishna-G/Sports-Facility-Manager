@@ -73,6 +73,7 @@
 <body>
 
 <div class="container">
+    <h1>Welcome, <span class="data" th:text="${loggedInUser.name}">Username</span>!</h1>
     <h1>Booking Details</h1>
     <p>ID: <span th:text="${facility.id}"></span></p>
     <p>Location: <span th:text="${facility.location}"></span></p>
