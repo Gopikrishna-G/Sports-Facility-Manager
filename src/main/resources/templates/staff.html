@@ -14,20 +14,21 @@
     <h2 class="text-center my-4">Bookings</h2>
     <div class="text-center my-4">
         <input type="text" id="bookingId" onkeyup="filterTable()" placeholder="Enter Booking ID.." style="text-align: center;">
+<!--        <input type="text" id="userFullName" onkeyup="filterTable()" placeholder="Enter Users Full Name.." style="text-align: center;">-->
     </div>
     <table id="bookingTable">
         <tr>
             <th>Booking ID</th>
-            <th>Start Time</th>
-            <th>End Time</th>
+<!--            <th>Start Time</th>-->
+<!--            <th>End Time</th>-->
             <th>Facility Name</th>
             <th>Facility Location</th>
             <th>User Name</th>
             <th>User Email</th>
             <th>User Phone No</th>
             <th>User City</th>
-            <th>User Approved?</th>
-            <th>User Slot</th>
+<!--            <th>User Approved?</th>-->
+<!--            <th>User Slot</th>-->
         </tr>
         </tr>
         <tr th:each="booking : ${bookings}">
@@ -40,8 +41,8 @@
             <td th:text="${booking.user.email}"></td>
             <td th:text="${booking.user.phoneNo}"></td>
             <td th:text="${booking.user.city}"></td>
-            <td th:text="${booking.approved}"></td>
-            <td th:text="${booking.slot}"></td>
+<!--            <td th:text="${booking.approved}"></td>-->
+<!--            <td th:text="${booking.slot}"></td>-->
         </tr>
     </table>
 </div>
@@ -96,3 +97,4 @@
 </script>
 </body>
 </html>
+
