@@ -192,7 +192,7 @@ public class OwnerController {
             // Update the status of the request to "rejected"
             request.setStatus("rejected");
             rq1repo.save(request);
-
+            
             // Redirect to the showRequests page
             return "redirect:/showRequests";
         } else {
