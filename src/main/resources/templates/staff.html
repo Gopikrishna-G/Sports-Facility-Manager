@@ -26,6 +26,7 @@
             <th>User Email</th>
             <th>User Phone No</th>
             <th>User City</th>
+            <th>User Approved?</th>
         </tr>
         </tr>
         <tr th:each="booking : ${bookings}">
@@ -38,6 +39,8 @@
             <td th:text="${booking.user.email}"></td>
             <td th:text="${booking.user.phoneNo}"></td>
             <td th:text="${booking.user.city}"></td>
+            <td th:text="${booking.approved}"></td>
+            <td th:text="${booking.slot}"></td>
         </tr>
     </table>
 </div>
